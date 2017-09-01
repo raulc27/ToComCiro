@@ -1,13 +1,7 @@
 <!doctype html>
 
 <!--
-#################################################################################################
-
-                        DESENVOLVIDO POR RAUL CASTRO
-
-                      SKYPE: RAULC27   SITE: www.raulcastro.com.br
-
-#################################################################################################
+Autores: (Vai inserindo teu nome/nick...)
 
 -->
 <html lang="pt-br">
