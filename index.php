@@ -12,7 +12,7 @@ Autores: (Vai inserindo teu nome/nick...)
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Castro Assessoria">
+    <meta name="author" content="">
 
     <meta name="keywords" content="foto, ciro gomes, rio de janeiro, brasil, brazil, ceara, fortaleza" />"
     <meta name="ROBOTS" content="INDEX, FOLLOW" />
