@@ -13,6 +13,9 @@ Testo as variáveis, estando com conteúdo, vou chamando as funções que irão 
    $email=$_REQUEST['email'];
    $DDD=$_REQUEST['DDD'];
    $telefone=$_REQUEST['telefone'];
+
+   $recaptcha_response=$_POST['g-recaptcha-response'];
+
    
 //array da imagem/upload
     $name = $_FILES["arquivo"]["name"];
@@ -24,25 +27,31 @@ Testo as variáveis, estando com conteúdo, vou chamando as funções que irão 
 if(!empty($nome) || !empty($cep) || !empty($email) || !empty($telefone) || !empty($name))
 {
 		
-		include("funcoes/constantes.php");
-		include("funcoes/checaVar.php");
-		include("funcoes/uuid.php");
-		include("funcoes/fazPostagem.php");
-		include("funcoes/backBlaze.php");
+		include("funcoes/constantes.php"); 	//api_keys, secrets etc, elas vem aqui nesse arquivo
+		include("funcoes/recaptcha.php"); 	//para trabalhar o recaptcha
+		include("funcoes/checaVar.php"); 	// checo as variáveis etc, realizo ajustes
+		include("funcoes/uuid.php");     	// "monto" um UUID
+		include("funcoes/fazPostagem.php"); // faço a postagem no REST...
+		include("funcoes/backBlaze.php");   // faço a postagem da foto no backBLAZE
 		
+		/*
+
+            checaVar fará as checagens padrão (tamanho da imagem, etc etc)
+
+		*/
+
+
+		$checaVariaveis=checaVar();
+
+		$checaVariaveis="Ok" ? $Postagem=fazPostagem():$respostaFinal="0";
+
+		$recaptcha=recaptcha();
+
+		$UUID=uuid();
 		
+		$Postagem="200" ? $postaBackBlaze=backBlaze():$respostaFinal="0";
 
-
-		$checaVariaveis=checaVar(); //checa tamnho da imagem e faz todos os outros ajustes
-
-		$UUID=uuid(); // gera UUID e armazena na variável $UUID..
-
-		$checaVariaveis="Ok" ? $Postagem=fazPostagem():$respostaFinal="0"; //Faz postagem no restfull se $checaVariaveis estiver ok
-
-				
-		$Postagem="200" ? $postaBackBlaze=backBlaze():$respostaFinal="0"; //Se postagem no restfull foi Ok, então posta imagem no backBlaze
-
-		$postaBackBlaze="200" ? $respostaFinal=$postaBackBlaze:$respostaFinal="0"; //Se postagem no backBlaze foi ok, retorna o resultado
+		$postaBackBlaze="200" ? $respostaFinal=$postaBackBlaze:$respostaFinal="0";
 		
 			
 
@@ -64,3 +73,4 @@ else
 }
 
 ?>
+
