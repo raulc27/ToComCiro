@@ -1,7 +1,12 @@
 <!doctype html>
 
 <!--
-Autores: (Vai inserindo teu nome/nick...)
+#################################################################################################
+
+                      Vejam o exemplo rodando em: http://trajano.00webhostapp.com/apiCiro
+                      Ainda em desenvolvimento
+
+#################################################################################################
 
 -->
 <html lang="pt-br">
@@ -12,7 +17,7 @@ Autores: (Vai inserindo teu nome/nick...)
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="">
+    <meta name="author" content="Castro Assessoria">
 
     <meta name="keywords" content="foto, ciro gomes, rio de janeiro, brasil, brazil, ceara, fortaleza" />"
     <meta name="ROBOTS" content="INDEX, FOLLOW" />
@@ -31,7 +36,7 @@ Autores: (Vai inserindo teu nome/nick...)
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=onSubmit' async defer></script>
     <script>
         function mascara(t, mask) {
             var i = t.value.length;
@@ -70,8 +75,8 @@ Autores: (Vai inserindo teu nome/nick...)
 
 
 	/* Esconde o input */
-		input[type='file'] {
-		  display: none
+	input[type='file'] {
+		  display: none;
 		}
 
 		/* Aparência que terá o seletor de arquivo */
@@ -90,6 +95,12 @@ Autores: (Vai inserindo teu nome/nick...)
 	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script> 
 
 	<script src="cad.js"  language="javascript" type="text/javascript"></script>
+    <script>
+       function onSubmit(token)
+        {
+          grecaptcha.execute();
+       }    
+     </script>
 </head>
 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
@@ -105,15 +116,15 @@ Autores: (Vai inserindo teu nome/nick...)
 
                     <div class="panel-body">
 
-                        <form onSubmit="verificar(this)" class="form-horizontal" name="api.php" role="form" action="" method="post">
+                        <form onSubmit="verificar(this)" class="form-horizontal" name="formulario" id="formulario" role="form" action="" method="post">
                             <!-- form dos 'obrigatórios' -->
                             <div class="form-group">
-                                <label for="nome" class="col-sm-3 control-label">Nome:</label>
+                                <!-- <label for="nome" class="col-sm-3 control-label">Nome:</label> -->
                                 <div class="col-sm-9"><input type="text" class="form-control input-lg" id="nome" placeholder="Seu nome completo..." name="nome" required></div>
                             </div>
 
                             <div class="form-group">
-                                <label for="cep" class="col-sm-3 col-xs-3 control-label">Cep:</label>
+                               <!-- <label for="cep" class="col-sm-3 col-xs-3 control-label">Cep:</label>-->
                                 <div class="col-md-9 col-xs-9"><input type=text name="cep" id="cep" class="form-control input-lg" pattern=".{9,}" placeholder="CEP" maxlength="9" required onkeypress="mascara(this, '#####-###')" /></div>
                             </div>
 
@@ -127,30 +138,30 @@ Autores: (Vai inserindo teu nome/nick...)
                             </div>
 
                             <div class="form-group">
-                                <label for="email" class="col-sm-3 col-xs-3 control-label">Email:</label>
+                                <!--<label for="email" class="col-sm-3 col-xs-3 control-label">Email:</label>-->
                                 <div class="col-md-9 col-xs-9">
                                     <input id="email" type="email" required placeholder="XXXXX@XXXX.XXX" name="email" class="form-control input-lg col-sm-6" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-				<label for="arquivo" class="upload">Inserir selfie com Ciro</label>
-                                <input type="file" id="arquivo" name="arquivo" class="btn" accept="image/png, image/jpeg" multiple />
+				<label for="arquivo" class="upload">Clique para upload da imagem</label>
+                                <input type="file" id="arquivo" name="arquivo" class="btn" accept="image/jpeg"  />
 				
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-3 col-xs-3 col-sm-3"><input type=checkbox checked id="concordo" value="concordo" class="form-control input-lg"></div>
-                                <label for="concordo" class="col-xs-9 control-label">Concordo com o termos de serviço:</label>
+                                <label for="concordo" class="col-xs-9 col-sm-9 col-md-9 control-label">Concordo com os termos de serviço:</label>
 
                             </div>
 
-                            		<div class="g-recaptcha" data-sitekey="6Lc71y4UAAAAAHwvUe53F2KUxNT79_ElGyiC9W65" data-size="invisible" data-callback="onSubmit">
-					
+                    <div class="g-recaptcha" id="g-recaptcha-response" data-sitekey="6Lc71y4UAAAAAHwvUe53F2KUxNT79_ElGyiC9W65" data-size="invisible" data-callback="onSubmit">
+					</div>
 
                             <div class="form-group last">
                                 <div class="col-sm-offset-1 col-sm-10">
-                                    <button onclick="insere()" name="submit" id="recaptcha-submit" type="button" value="Enviar" class="btn btn-primary btn-lg">Enviar </button>&nbsp&nbsp
+                                    <button  onclick="insere()" name="submit"  type="button" value="Enviar" class="btn btn-primary btn-lg">Enviar </button>&nbsp&nbsp
                                     <input type="reset" value="Reset" class="btn btn-danger btn-lg">
                                 </div>
                             </div>
@@ -162,11 +173,11 @@ Autores: (Vai inserindo teu nome/nick...)
 
                     </div>
 
-
+                    
                     <div class="panel-footer">
-                        
+                            
                     </div>
-
+                    
 
 
 
@@ -174,9 +185,12 @@ Autores: (Vai inserindo teu nome/nick...)
 
             </div>
         </div>
+
+      
+
+    </div>    
 </body>
-<!--
-Back-End▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔1.Valida as dimensões da imagem para ver se estão de acordo com o mínimoconfigurado.2.Gera uma UUID v4 aleatório, este será o nome da imagem.3.Realiza uma requisição do tipo POST para um serviço REST do #TCC, com osdados do apoiador, o UUID gerado, a informação do recaptcha recebida dofront-end e a chave de acesso do serviço REST (vide Observações).4.Adiciona uma marca d’água configurável na imagem enviada pelo apoiador.5.Envia a imagem com o nome igual ao UUID gerado para o cloud storageBackblaze B2.
-    -->
+
+    
 
 </html>
