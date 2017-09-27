@@ -62,9 +62,10 @@
     </script>
     <style>
         body {
-            background-image: url('https://cadastro.todoscomciro.com/assets/img/background.jpg');
-            background-attachment: local;
+            background-image: url('https://todoscomciro.com/wp-content/uploads/2017/08/ciro-header-novo.jpg');
+            background-attachment: fixed;
             background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
         }
         
@@ -107,7 +108,7 @@
     <div class="container">
         <div class="row vert-offset">
 
-            <div class="col-md-4 col-sm-4 col-md-offset-8 col-sm-offset-8">
+            <div class="col-md-4 col-sm-4 col-md-offset-9 col-sm-offset-9">
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
