@@ -19,6 +19,7 @@
 
 		Servidor RESTfull para treinar o appCiro
 
+		Não faz parte da API, apenas não havendo serviço REST para gravar as info, pode usar esse daqui.
 */
 
 // --- Step 1: Initialize variables and functions
