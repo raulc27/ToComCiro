@@ -31,11 +31,12 @@ Testo as variáveis, estando com conteúdo, vou chamando as funções que irão 
 if(!empty($nome) and !empty($cep) and !empty($email) and !empty($telefone) and !empty($temp) )
 {
 		
-		//include("funcoes/constantes.php"); 	//api_keys, secrets etc, elas vem aqui nesse arquivo
-		//include("funcoes/recaptcha.php"); 	//para trabalhar o recaptcha
-		//include("funcoes/checaVar.php"); 	// checo as variáveis etc, realizo ajustes
-		//include("funcoes/uuid.php");     	// "monto" um UUID
-		//include("funcoes/fazPostagem.php"); // faço a postagem no REST...
+		include("funcoes/constantes.php"); 	//api_keys, secrets etc, elas vem aqui nesse arquivo
+		include("funcoes/recaptcha.php"); 	//para trabalhar o recaptcha
+		include("funcoes/checaVar.php"); 	// checo as variáveis etc, realizo ajustes
+		include("funcoes/uuid.php");     	// "monto" um UUID
+		include("funcoes/fazPostagem.php"); // faço a postagem no REST...
+		include("funcoes/modArq.php"); //faz mods na imagem
 		//include("funcoes/backBlaze.php");   // faço a postagem da foto no backBLAZE
 		
 		/*
@@ -45,14 +46,17 @@ if(!empty($nome) and !empty($cep) and !empty($email) and !empty($telefone) and !
 		*/
 
 
-		//$checaVar=checaVar();
+		$checaVar=checaVar();
 
 
-		//$recaptcha=recaptcha();
+		$recaptcha=recaptcha();
 
-		//$UUID=uuid();
+		$UUID=uuid();
 
-		//$checaVar="Ok" ? $modArq=modArq():$respostaFinal="0";
+
+		
+
+		$checaVar="Ok" ? $modArq=modArq():$respostaFinal="0";
 
 		//$modArq="Ok" ? $Postagem=fazPostagem():$respostaFinal="0";
 		//$Postagem="200" ? $postaBackBlaze=backBlaze():$respostaFinal="0";

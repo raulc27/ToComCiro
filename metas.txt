@@ -1,0 +1,11 @@
+Back-End??????????????????????
+
+1.Valida as dimensões da imagem para ver se estão de acordo com o mínimo configurado. [dimensão]
+
+2.Gera uma UUID v4 aleatório, este será o nome da imagem. [OK]
+
+3.Realiza uma requisição do tipo POST para um serviço REST do #TCC, com osdados do apoiador, o UUID gerado, a informação do recaptcha recebida dofront-end e a chave de acesso do serviço REST (vide Observações).
+
+4.Adiciona uma marca d’água configurável na imagem enviada pelo apoiador.
+
+5.Envia a imagem com o nome igual ao UUID gerado para o cloud storageBackblaze B2.
