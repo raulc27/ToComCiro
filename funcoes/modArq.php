@@ -10,31 +10,41 @@ function modArq()
 
     global $name, $temp, $UUID,$type,$size,$error;
 
-    rename($name,"$UUID"."jpg");
+    
+        $novo_Nome=rename($temp,"temp/$UUID".".jpeg");
 
+        $logoimg="img/logo.gif";
 
-        $logoimg="https://cadastro.todoscomciro.com/assets/img/logo.png";
+       $padding=10; 
+       $opacidade=60;
 
-        $padding=10; 
-        $opacity=80;
+       $logo=imagecreatefromgif("$logoimg");
 
-        $logo=imagecreatefrompng("$logoimg");
+       $imagem=imagecreatefromjpeg("temp/$UUID".".jpeg");
 
-        $imagem=imagecreatefromjpg("$temp");
-
-        $logo_size=getimagesize("$logoimg");
+       $logo_size=getimagesize("$logoimg");
 
         $logo_width=$logo_size[0];
-        $logo_heigth=$logo_size[1];
+        $logo_height=$logo_size[1];
 
-        $imagem_size=getimagesize("$temp");
+        $imagem_size=getimagesize("temp/$UUID".".jpeg");
 
-        $dest_x = $imagem_size[0] - $logo_width - $padding;
-        $dest_y = $imagem_size[1] - $logo_height - $padding;
+       $dest_x = $imagem_size[0] - $logo_width - $padding;
+       $dest_y = $imagem_size[1] - $logo_height - $padding;
         
-        imagecopymerge($imagem, $logo, $dest_x, $dest_y, 0, 0, $logo_width, $logo_height, $opacidade);
+       //imagecopymerge
+      imagecopymerge($imagem, $logo, $dest_x, $dest_y, 0, 0, $logo_width, $logo_height, $opacidade);
 
-        $temp=$imagem;
+       header("content-type: image/jpeg");
+       //unlink("$novo_Nome");
+       imagejpeg($imagem,"temp/$UUID".".jpeg");
+
+              //imagejpeg($imagem);
+              imagedestroy($imagem);
+              imagedestroy($logo);
+
+
+
 
         sprintf("Ok");
 }

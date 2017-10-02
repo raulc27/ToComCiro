@@ -1,4 +1,4 @@
-<?
+<?php
 // Gerando UUID
    function uuid() {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',

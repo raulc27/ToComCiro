@@ -17,7 +17,7 @@ function checaVar()
     $tamanho=getimagesize($temp);
 
    
-    if(($type!="jpg") && ($tamanho[0]!=$largura_imagem) && ($tamanho[1]!=$altura_imagem))
+    if(($type!="jpg") && ($tamanho[0]>$largura_imagem) && ($tamanho[1]>$altura_imagem))
 
     {
         $resp="Ok";
