@@ -10,13 +10,16 @@ Essa é parte para conseguir AUTORIZAÇÃO no backBlaze
 
 */
 
+
+
+
 function backBlaze()
 {
 
     $account_id = "3f058d94f9cd"; // Obtained from your B2 account page
     $application_key = "001c6985810a8fafef460617f399039fe8bf495ff1"; // Obtained from your B2 account page
-    $credentials = base64_encode($account_id . ":" . $application_key);
-    $url = "https://api.backblazeb2.com/b2api/v1/b2_authorize_account";
+   $credentials = base64_encode($account_id . ":" . $application_key);
+   $url = "https://api.backblazeb2.com/b2api/v1/b2_authorize_account";
     
     $session = curl_init($url);
     
@@ -34,13 +37,16 @@ function backBlaze()
 
     $resposta=json_decode($server_output,true);
 
+    //$resposta=$server_output;
 
 
+    //$api_url = "$resposta['apiUrl']"; // From b2_authorize_account call
+    $api_url=$resposta->{'apiUrl'};
+    //$auth_token = "$resposta['authorizationToken']"; // From b2_authorize_account call
+    $auth_token=$resposta->{'authorizationToken'};
 
-    $api_url = "$resposta['apiUrl']"; // From b2_authorize_account call
-    $auth_token = "$resposta['authorizationToken']"; // From b2_authorize_account call
     $bucket_id = "939f6005c8ade9345fd90c1d";  // The ID of the bucket you want to upload to
-    
+
     $session = curl_init($api_url .  "/b2api/v1/b2_get_upload_url");
     
     // Add post fields
@@ -59,13 +65,49 @@ function backBlaze()
     curl_close ($session); // Clean up
     //echo ($server_output); // Tell me about the rabbits, George!
 
+/*
+
+***************************************************************************
+
+B2_GET_UPLOAD_URL
+
+(E´necessário antes do upload do arquivo, é com ela que pegamos os dados para fazer upload)
+
+
+**************************************************************************
 
 
 
 
+*/
 
 
+/*
+$api_url = ""; // From b2_authorize_account call
+$auth_token = ""; // From b2_authorize_account call
+$bucket_id = "";  // The ID of the bucket you want to upload to
+*/
 
+
+$session = curl_init($api_url .  "/b2api/v1/b2_get_upload_url");
+
+// Add post fields
+$data = array("bucketId" => $bucket_id);
+$post_fields = json_encode($data);
+curl_setopt($session, CURLOPT_POSTFIELDS, $post_fields); 
+
+// Add headers
+$headers = array();
+$headers[] = "Authorization: " . $auth_token;
+curl_setopt($session, CURLOPT_HTTPHEADER, $headers); 
+
+curl_setopt($session, CURLOPT_POST, true); // HTTP POST
+curl_setopt($session, CURLOPT_RETURNTRANSFER, true);  // Receive server response
+$server_output = curl_exec($session); // Let's do this!
+curl_close ($session); // Clean up
+//echo ($server_output); // Tell me about the rabbits, George!
+
+$resposta1=json_decode("$server_output");
 
 
 
@@ -78,17 +120,19 @@ function backBlaze()
         global $UUID, $name,$temp;
 
 
-
-        $file_name = "$name";
+        $file_name = "$UUID";
         //$my_file = "$temp" . $file_name;
-        $my_file = "$temp";
+        //$my_file = "$temp";
+        $my_file="temp/$UUID".".jpeg";
         $handle = fopen($my_file, 'r');
         $read_file = fread($handle,filesize($my_file));
-        
-        $upload_url = "$resposta['uploadUrl'];"; // Provided by b2_get_upload_url
-        $upload_auth_token = ""; // Provided by b2_get_upload_url
-        $bucket_id = "";  // The ID of the bucket
-        $content_type = "text/plain";
+       
+        //$upload_url = "$resposta['uploadUrl'];"; // Provided by b2_get_upload_url
+        $upload_url=$resposta1->{'uploadUrl'};
+
+        $upload_auth_token = "$resposta1->{'authorizationToken'}"; // Provided by b2_get_upload_url
+        //$bucket_id = "$resposta1->{'bucketID'}";  // The ID of the bucket
+        $content_type = "image/jpeg";
         $sha1_of_file_data = sha1_file($my_file);
         
         $session = curl_init($upload_url);
@@ -108,11 +152,14 @@ function backBlaze()
         curl_setopt($session, CURLOPT_RETURNTRANSFER, true);  // Receive server response
         $server_output = curl_exec($session); // Let's do this!
         curl_close ($session); // Clean up
-       // echo ($server_output); // Tell me about the rabbits, George!
-    
-    sprintf("200")/ //ehehe...
+       //echo ($server_output); // Tell me about the rabbits, George!
 
+  /*  
+    sprintf("200") //ehehe...
+*/
 
 
 }
+
+
 ?>
