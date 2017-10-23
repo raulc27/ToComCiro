@@ -46,14 +46,22 @@ function insere() {
         },
         //retorna o resultado da pagina para onde enviamos os dados
         success: function(result) {
-            //se foi inserido com sucesso
-            if ($.trim(result) == '1') {
-                alert(" sucesso!");
-            }
-            //se foi um erro
-            else {
+            //se não carregou nada
+            if ($.trim(result)=='0') {
+
+
                 alert("Falha ao inserir, verifique se todos os campos do formulário foram preenchidos");
+               
             }
+            //se foi um sucesso, traz a imagem alterada
+            else {
+                 //$('#painel_mascara').hide;
+
+                 alert("sucesso");
+                //document.getElementById('painel_mascara').innerHTML='<img src='+'result'+'/>';
+            }
+            
+
 
         }
     });

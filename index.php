@@ -112,10 +112,12 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">
-                        <span class="glyphicon glyphicon-picture"></span> Envie uma selfie com Ciro Gomes!
+                        <span class="glyphicon glyphicon-picture"></span> Marque a sua foto com a #TocomCiro !
                     </div>
 
+
                     <div class="panel-body">
+                        <div id="painel_mascara">
 
                         <form onSubmit="verificar(this)" class="form-horizontal" name="formulario" id="formulario" role="form" action="" method="post">
                             <!-- form dos 'obrigatórios' -->
@@ -170,7 +172,7 @@
                         </form>
 
 
-
+                    </div> <!-- painel_mascara -->
 
                     </div>
 

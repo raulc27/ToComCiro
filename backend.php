@@ -38,6 +38,7 @@ if(!empty($nome) and !empty($cep) and !empty($email) and !empty($telefone) and !
 		include("funcoes/fazPostagem.php"); // faço a postagem no REST...
 		include("funcoes/modArq.php"); //faz mods na imagem
 		//include("funcoes/backBlaze.php");   // faço a postagem da foto no backBLAZE
+		include("funcoes/picasa.php"); //botei o nome de picasa... 
 		
 		/*
 
@@ -58,6 +59,10 @@ if(!empty($nome) and !empty($cep) and !empty($email) and !empty($telefone) and !
 
 		$checaVar="Ok" ? $modArq=modArq():$respostaFinal="0";
 
+		picasa();
+
+		//backBlaze();
+
 		//$modArq="Ok" ? $Postagem=fazPostagem():$respostaFinal="0";
 		//$Postagem="200" ? $postaBackBlaze=backBlaze():$respostaFinal="0";
 
@@ -67,7 +72,7 @@ if(!empty($nome) and !empty($cep) and !empty($email) and !empty($telefone) and !
 
 				
 
-
+			
 		
 			
 		      echo "1"; 
